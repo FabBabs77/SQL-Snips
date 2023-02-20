@@ -1,0 +1,7 @@
+SELECT @@VERSION AS 'SQL Server Version', 
+       SERVERPROPERTY('productlevel') AS 'Product Level', 
+       SERVERPROPERTY('productversion') AS 'Product Version', 
+       SERVERPROPERTY('edition') AS 'Edition',
+       create_date AS 'Service Pack Install Date'
+FROM sys.dm_os_windows_info 
+WHERE windows_release LIKE 'Microsoft Windows NT%'
