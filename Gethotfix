@@ -1,0 +1,2 @@
+Get-WmiObject -Class "Win32_QuickFixEngineering" -Filter "HotFixID LIKE 'KB%' AND Caption LIKE '%SQL%Server%'"
+
