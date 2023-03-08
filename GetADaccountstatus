@@ -1,0 +1,11 @@
+
+$data = Import-CSV "C:\Path\To\Spreadsheet.csv"
+
+$account = Get-ADUser -Identity $user.Username -Properties Enabled
+    if ($account.Enabled -eq $true) {
+        Write-Output "$($user.Username) is enabled."
+    }
+    else {
+        Write-Output "$($user.Username) is disabled."
+    }
+}
