@@ -9,3 +9,16 @@ $account = Get-ADUser -Identity $user.Username -Properties Enabled
         Write-Output "$($user.Username) is disabled."
     }
 }
+
+
+foreach ($user in $users) {
+    $username = $user.Username
+    try {
+        $aduser = Get-ADUser $username -ErrorAction Stop
+        $status = if ($aduser.Enabled) { "Enabled" } else { "Disabled" }
+        Write-Output "$username: $status"
+    }
+    catch {
+        Write-Output "$username: Not found"
+    }
+}
