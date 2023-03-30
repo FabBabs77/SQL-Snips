@@ -1,0 +1,21 @@
+SELECT
+
+  CAST(DATEADD(DAY, DATEDIFF(DAY, 0, start_time), 0) AS DATE) AS [Date],
+
+  COUNT(*) AS [Execution Count]
+
+FROM
+
+  sys.dm_exec_query_stats
+
+WHERE
+
+  start_time >= DATEADD(DAY, -7, GETDATE())
+
+GROUP BY
+
+  CAST(DATEADD(DAY, DATEDIFF(DAY, 0, start_time), 0) AS DATE)
+
+ORDER BY
+
+  [Date]
