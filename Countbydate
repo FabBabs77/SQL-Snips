@@ -1,0 +1,5 @@
+SELECT YEAR(DateColumn) AS Year, MONTH(DateColumn) AS Month, COUNT(*) AS Records
+FROM YourTable
+GROUP BY YEAR(DateColumn), MONTH(DateColumn)
+ORDER BY YEAR(DateColumn), MONTH(DateColumn)
+
