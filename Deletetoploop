@@ -1,0 +1,8 @@
+DECLARE @RowCount INT = 1
+WHILE (@RowCount > 0)
+BEGIN
+    DELETE TOP(5000) FROM YourTable
+    WHERE SomeCondition = true
+    SET @RowCount = @@ROWCOUNT
+END
+
