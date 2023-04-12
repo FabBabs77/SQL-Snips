@@ -1,0 +1,105 @@
+import tkinter as tk
+
+import requests
+
+# Create the main window
+
+root = tk.Tk()
+
+root.title("Fallout Dashboard")
+
+root.geometry("800x600")
+
+root.configure(background='black')
+
+# Create a title label
+
+title_label = tk.Label(root, text="Fallout Dashboard", font=("Press Start 2P", 24), fg="green", bg="black")
+
+title_label.pack(pady=20)
+
+# Create a health label and progress bar
+
+health_label = tk.Label(root, text="Health:", font=("Press Start 2P", 14), fg="green", bg="black")
+
+health_label.pack()
+
+health_bar = tk.Canvas(root, width=400, height=20, bg="black", highlightthickness=0)
+
+health_bar.pack()
+
+health_bar.create_rectangle(0, 0, 400, 20, fill="green")
+
+health_bar.create_text(200, 10, text="100/100", font=("Press Start 2P", 10), fill="black")
+
+# Create a radiation label and progress bar
+
+rad_label = tk.Label(root, text="Radiation:", font=("Press Start 2P", 14), fg="green", bg="black")
+
+rad_label.pack()
+
+rad_bar = tk.Canvas(root, width=400, height=20, bg="black", highlightthickness=0)
+
+rad_bar.pack()
+
+rad_bar.create_rectangle(0, 0, 400, 20, fill="green")
+
+rad_bar.create_text(200, 10, text="0/100", font=("Press Start 2P", 10), fill="black")
+
+# Create a status label
+
+status_label = tk.Label(root, text="Status: Online", font=("Press Start 2P", 14), fg="green", bg="black")
+
+status_label.pack(pady=20)
+
+# Create a news label and text widget
+
+news_label = tk.Label(root, text="News:", font=("Press Start 2P", 14), fg="green", bg="black")
+
+news_label.pack()
+
+news_text = tk.Text(root, width=80, height=10, font=("Press Start 2P", 10), bg="black", fg="green", highlightthickness=0)
+
+news_text.pack()
+
+# Make an HTTP request to the BBC News API
+
+url = "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=YOUR_API_KEY"
+
+response = requests.get(url)
+
+news_data = response.json()
+
+# Update the news text with the news data
+
+if news_data["status"] == "ok":
+
+    articles = news_data["articles"]
+
+    for article in articles:
+
+        title = article["title"]
+
+        description = article["description"]
+
+        news_text.insert(tk.END, f"{title}\n{description}\n\n")
+
+else:
+
+    news_text.insert(tk.END, "Failed to retrieve news data.")
+
+# Create a weather label and text widget
+
+weather_label = tk.Label(root, text="Weather:", font=("Press Start 2P", 14), fg="green", bg="black")
+
+weather_label.pack()
+
+weather_text = tk.Text(root, width=80, height=10, font=("Press Start 2P", 10), bg="black", fg="green", highlightthickness=0)
+
+weather_text.pack()
+
+weather_text.insert(tk.END, "No weather data available.")
+
+# Run the main loop
+
+root.mainloop()
